@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PrintTab</class>
+ <widget class="QWidget" name="PrintTab">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1418</width>
+    <height>788</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">	QWidget {
+		background-color: #1E1E1E;
+		color: #FFFFFF;
+	}
+	QGroupBox {
+        border: none;
+        background-color: #2E2E2E;
+		padding: 25px 10px;
+        border-radius: 15px;
+        font-size: 25px;
+        font-family: &quot;Microsoft YaHei&quot;;
+        font-weight: bold;
+        color: #D9D9D9;
+    }
+    QGroupBox::title {
+        padding: 5px;
+        margin-left: 15px;
+    }
+  
+    QPushButton {
+        background-color: #3A3A3A;
+        border: 2px solid #8757ff;
+        color: #D9D9D9;
+        font-size: 25px;
+        font-family: &quot;Microsoft YaHei&quot;;
+        font-weight: bold;
+        border-radius: 15px;
+        padding: 10px;
+    }
+    QPushButton:hover {
+        background-color: #3f59fa;
+    }
+    QPushButton:pressed {
+        background-color: #87B3E5; 
+        border: 2px solid #4A90E2; 
+    }
+	QPushButton:disabled {
+    	background-color: #2E2E2E;
+    	color: #A9A9A9;
+    	border: 2px solid #555;
+    	padding: 10px; 
+	}
+</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,1">
+   <item>
+    <widget class="QGroupBox" name="projectorGroupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>打印</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+       <widget class="QLabel" name="imageLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>992</width>
+          <height>558</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+            QLabel#imageLabel {
+                background-color: #3A3A3A; /* 深灰背景 */
+                border: 1px solid #4D4D4D; /* 边框颜色 */
+            }
+         </string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="runButton">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>80</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>打  印</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QPushButton" name="pauseButton">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>80</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>暂  停</string>
+          </property>
+         </widget>
+        </item>
+        <item alignment="Qt::AlignRight">
+         <widget class="QPushButton" name="stopButton">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>80</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>取  消</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="codeExecutionGroupBox">
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>执行代码</string>
+     </property>
+     <layout class="QHBoxLayout" name="codeExecutionLayout">
+      <item>
+       <widget class="QTextEdit" name="codeExecutionTextEdit">
+        <property name="styleSheet">
+         <string notr="true">
+            QTextEdit#codeExecutionTextEdit {
+                background-color: #3A3A3A; /* 文本编辑框背景 */
+                border: 1px solid #4D4D4D; /* 边框颜色 */
+                color: white;               /* 字体颜色 */
+                font-size: 18px;            /* 字体大小 */
+                font-family: Arial;         /* 字体类型 */
+                font-weight: bold;          /* 字体加粗 */
+            }
+         </string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

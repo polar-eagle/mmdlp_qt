@@ -1,0 +1,35 @@
+motor:
+  glass_default_acc: 60
+  glass_default_dec: -60
+  glass_default_vel: 60
+  glass_home: 19.499191284179688
+  glass_lead: 2.0
+  glass_max_position: 0
+  glass_min_position: -50
+  glass_motor_id: 1
+  glass_safe_current_limit: 1.2
+  glass_safe_velocity_limit: 100
+  motor_num: 3
+  plate_default_acc: 60
+  plate_default_dec: -60
+  plate_default_vel: 60
+  plate_home: 63.05375671386719
+  plate_lead: -2.0
+  plate_max_position: 160
+  plate_min_position: 0
+  plate_motor_id: 2
+  plate_safe_current_limit: 1.2
+  plate_safe_velocity_limit: 100
+  rotate_default_acc: 60
+  rotate_default_dec: -60
+  rotate_default_vel: 60
+  rotate_home: 5.8830718994140625
+  rotate_lead: -0.27778
+  rotate_max_position: 4.8
+  rotate_min_position: 0
+  rotate_motor_id: 3
+  rotate_safe_current_limit: 5.0
+  rotate_safe_velocity_limit: 60
+projector:
+  current: 30
+  display_time: 2.5
