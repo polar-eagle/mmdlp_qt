@@ -22,12 +22,7 @@ SwitchButton::SwitchButton(QWidget *parent):
 SwitchButton::~SwitchButton()
 {
 }
-/**
- * @brief 设置切换按钮大小
- * @param nWidth 宽度
- * @param nHeight 高度
- * @return void
- */
+
 void SwitchButton::SetSize(int nWidth, int nHeight)
 {
 	resize(nWidth, nHeight);
@@ -39,11 +34,7 @@ void SwitchButton::SetSize(int nWidth, int nHeight)
 	m_nRectWidth = width() - m_nArcRadius;
 	SetStateTexts(m_stateTexts);
 }
-/**
- * @brief 设置状态文字
- * @param stateTexts 状态文字
- * @return void
- */
+
 void SwitchButton::SetStateTexts(QStringList stateTexts)
 {
 	int count = stateTexts.size();
@@ -62,38 +53,23 @@ void SwitchButton::SetStateTexts(QStringList stateTexts)
 	m_stateTexts = stateTexts;
 	update();
 }
-/**
- * @brief 设置背景颜色
- * @param color 颜色
- * @return void
- */
+
 void SwitchButton::SetBackgoundColor(const QColor& color)
 {
 	m_stateColors = color;
 	update();
 }
-/**
- * @brief 设置滑块颜色
- * @param color 颜色
- * @return void
- */
+
 void SwitchButton::SetSlideColor(const QColor& color)
 {
 	m_pSlider->SetSliderColor(color);
 }
-/**
- * @brief 设置滑块文字字体
- * @param font 字体
- * @return void
- */
+
 void SwitchButton::SetSlideTextFont(const QFont& font) {
 	m_pSlider->SetTextFont(font);
 }
-/**
- * @brief 设置状态
- * @param state 状态
- * @return void
- */
+
+
 void SwitchButton::SetState(int state)
 {
 	if (state < 0 || state >= m_nStateCount) return;
@@ -123,19 +99,12 @@ void SwitchButton::SetState(int state)
 	pAnimation->start(QAbstractAnimation::DeleteWhenStopped);
 	emit Clicked(m_currentState);
 }
-/**
- * @brief 获取状态
- * @return QString
- */
+
 QString SwitchButton::GetState() const
 {
 	return m_stateTexts[m_currentState];
 }
-/**
- * @brief 绘制按钮
- * @param event 事件
- * @return void
- */
+
 void SwitchButton::paintEvent(QPaintEvent *)
 {
 	QPainter p(this);
@@ -164,11 +133,7 @@ void SwitchButton::paintEvent(QPaintEvent *)
 		p.drawText(textRect, Qt::AlignCenter, m_stateTexts[i]);
 	}
 }
-/**
- * @brief 鼠标点击事件
- * @param event 事件
- * @return void
- */
+
 void SwitchButton::mousePressEvent(QMouseEvent *event)
 {
 	int clickX = event->pos().x();
@@ -181,9 +146,7 @@ void SwitchButton::mousePressEvent(QMouseEvent *event)
 		}
 	}
 }
-/**
- * @brief 构造函数，初始化滑块颜色
- */
+
 Slider::Slider(QWidget *parent) : QWidget(parent)
 {
 	m_sliderColor = Qt::blue;
@@ -192,39 +155,23 @@ Slider::Slider(QWidget *parent) : QWidget(parent)
 Slider::~Slider()
 {
 }
-/**
- * @brief 设置滑块颜色
- * @param color 颜色
- * @return void
- */
+
 void Slider::SetSliderColor(const QColor &color)
 {
 	m_sliderColor = color;
 	update();
 }
-/**
- * @brief 设置滑块文本
- * @param text 文本
- * @return void
- */
+
 void Slider::SetText(const QString &text) {
 	m_text = text;
 	update();
 }
-/**
- * @brief 设置滑块文本字体
- * @param font 字体
- * @return void
- */
+
 void Slider::SetTextFont(const QFont &font) {
 	m_textFont = font;
 	update();
 }
-/**
- * @brief 绘制滑块
- * @param event 事件
- * @return void
- */
+
 void Slider::paintEvent(QPaintEvent *event)
 {
 	QPainter p(this);

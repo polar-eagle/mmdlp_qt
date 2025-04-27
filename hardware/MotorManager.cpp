@@ -40,11 +40,6 @@ MotorManager::~MotorManager()
     delete plateMotor;
     delete rotateMotor;
 }
-/**
- * @brief 初始化电机配置
- * @return void
- * @note 从配置文件中读取电机的home、lead、max_position、min_position、default_acc、default_dec、default_vel
- */
 void MotorManager::initConfig()
 {
     ConfigManager &config = ConfigManager::instance();
@@ -93,10 +88,6 @@ void MotorManager::initConfig()
     qDebug() << "plate lead: " << plateMotor->Lead();
     qDebug() << "rotate lead: " << rotateMotor->Lead();
 }
-/**
- * @brief 保存所有电机参数
- * @return void
- */
 void MotorManager::saveAllMotorParms()
 {
     glassMotor->saveMotorParams();
@@ -104,39 +95,42 @@ void MotorManager::saveAllMotorParms()
     rotateMotor->saveMotorParams();
 }
 /**
- * @brief 获取所有电机信息
- * @return void
+ * @brief Get all motor info
+ * @details Get all motor UnifiedID and put them into uIDArray. If error happens, errorCode will be set.
  */
 void MotorManager::getAllMotorInfo()
 {
     uIDArray = pController->lookupActuators(errorCode);
-    for (auto uID : uIDArray)
+    for(auto uID : uIDArray)
     {
         cout << "Actuator ID: " << (int)uID.actuatorID << " IP address: " << uID.ipAddress.c_str() << endl;
     }
 }
+
 /**
- * @brief 启用所有电机
- * @return void
+ * @brief Enable all motors
+ * @details Get all motor info and enable motors in batch. If motor number is less than or equal to MOTOR_NUM, print error message.
+ * If motor info error, print error message. If motor enable success, print success message and motor info.
+ * If motor enable fail, print fail message.
  */
 void MotorManager::enableAllMotors()
 {
     getAllMotorInfo();
     if (errorCode != Actuator::ERR_NONE)
     {
-        qDebug() << "Motor Error: " << errorCode;
+        qDebug() << "Motor Error: " << errorCode ;
     }
     else
     {
         if (uIDArray.size() < motorNum)
         {
-            qDebug() << "Motor Number Error: " << uIDArray.size();
+            qDebug() << "Motor Number Error: " << uIDArray.size() ;
         }
         else
         {
             if (pController->enableActuatorInBatch(uIDArray))
             {
-                qDebug() << "Motor Init Success";
+                qDebug() << "Motor Init Success" ;
                 for (auto uID : uIDArray)
                 {
                     cout << "Actuator ID: " << (int)uID.actuatorID << " IP address: " << uID.ipAddress.c_str() << endl;
@@ -144,33 +138,32 @@ void MotorManager::enableAllMotors()
             }
             else
             {
-                qDebug() << "Motor Init Fail";
+                qDebug() << "Motor Init Fail" ;
             }
         }
     }
 }
 
 /**
- * @brief 禁用所有电机
- * @return void
+ * @brief Disable all motor
+ * @return Disable all motor success return true, else return false
  */
 void MotorManager::disableAllMotors()
 {
     if (pController->disableAllActuators())
     {
-        qDebug() << "Motor Disable Success";
+        qDebug() << "Motor Disable Success" ;
         this_thread::sleep_for(std::chrono::milliseconds(200));
     }
     else
     {
-        qDebug() << "Motor Disable Fail";
+        qDebug() << "Motor Disable Fail" ;
     }
 }
 
 /**
- * @brief 设置所有电机模式
- * @param mode 电机模式
- * @return void
+ * @brief Set all motor mode
+ * @param mode motor mode
  */
 void MotorManager::setAllMotorMode(ActuatorMode mode)
 {
@@ -178,11 +171,9 @@ void MotorManager::setAllMotorMode(ActuatorMode mode)
     plateMotor->setMode(mode);
     rotateMotor->setMode(mode);
 }
-
 /**
- * @brief 设置所有电机profile position最大速度
- * @param max_vel 最大速度值
- * @return void
+ * @brief Set all motor profile position maximum velocity
+ * @param max_vel maximum velocity value
  */
 void MotorManager::setAllMotorProfilePositionMaxVel(int max_vel)
 {
@@ -190,11 +181,9 @@ void MotorManager::setAllMotorProfilePositionMaxVel(int max_vel)
     plateMotor->setProfilePositionMaxVel(max_vel);
     rotateMotor->setProfilePositionMaxVel(max_vel);
 }
-
 /**
- * @brief 设置所有电机profile position加速度
- * @param acc 加速度值
- * @return void
+ * @brief Set all motor profile position acceleration
+ * @param acc acceleration value
  */
 void MotorManager::setAllMotorProfilePositionAcc(int acc)
 {
@@ -202,10 +191,10 @@ void MotorManager::setAllMotorProfilePositionAcc(int acc)
     plateMotor->setProfilePositionAcc(acc);
     rotateMotor->setProfilePositionAcc(acc);
 }
+
 /**
- * @brief 设置所有电机profile position减速度
- * @param dec 减速度值
- * @return void
+ * @brief set all motor profile position deceleration
+ * @param dec deceleration value
  */
 void MotorManager::setAllMotorProfilePositionDec(int dec)
 {

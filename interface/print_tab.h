@@ -20,8 +20,8 @@ public slots:
 	void commandDisplay(const QString &command);
 	void timeOutError();
 signals:
-	// 同步投影仪图像
 	void ProjectorShow(const QString &imagePath);
+	void transmitSliceName(const QString sliceName);
 
 private:
 	Ui::PrintTab *ui;

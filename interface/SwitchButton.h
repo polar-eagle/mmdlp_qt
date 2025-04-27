@@ -1,5 +1,4 @@
-#ifndef SWITCHBUTTON_H
-#define SWITCHBUTTON_H
+#pragma once
 
 #include <QWidget>
 #include <QVector>
@@ -16,14 +15,14 @@ class SwitchButton : public QWidget
 	Q_OBJECT
 
 public:
-	explicit SwitchButton(QWidget *parent = nullptr);
+	explicit SwitchButton( QWidget *parent = nullptr);
 	~SwitchButton();
 
 	void SetSize(int nWidth, int nHeight);
 	void SetStateTexts(QStringList stateTexts);
-	void SetBackgoundColor(const QColor &color);
-	void SetSlideColor(const QColor &color);
-	void SetSlideTextFont(const QFont &font);
+	void SetBackgoundColor(const QColor& color);
+	void SetSlideColor(const QColor& color);
+	void SetSlideTextFont(const QFont& font);
 	void SetState(int state);
 	QString GetState() const;
 
@@ -32,17 +31,17 @@ protected:
 	void mousePressEvent(QMouseEvent *event) override;
 
 private:
-	bool m_bClicked;			   // æ˜¯å¦è¢«ç‚¹å‡»
-	int m_nStateCount;			   // çŠ¶æ€æ•°é‡
-	int m_currentState;			   // å½“å‰çŠ¶æ€
-	QColor m_stateColors;		   // çŠ¶æ€é¢œè‰²
-	QFont m_textFont;			   // æ–‡å­—å­—ä½“
-	QStringList m_stateTexts;	   // çŠ¶æ€æ–‡å­—
-	QVector<int> m_statePositions; // çŠ¶æ€ä½ç½®
-	int m_nArcRadius;			   // åœ†è§’åŠå¾„
-	int m_nRectWidth;			   // çŸ©å½¢å®½åº¦
-	const int m_nDuration = 100;   // åŠ¨ç”»æŒç»­æ—¶é—´
-	Slider *m_pSlider;			   // æ»‘å—
+	bool m_bClicked;                // ÊÇ·ñ±»µã»÷
+	int m_nStateCount;              // ×´Ì¬ÊıÁ¿
+	int m_currentState;             // µ±Ç°×´Ì¬
+	QColor m_stateColors;           // ×´Ì¬ÑÕÉ«
+	QFont m_textFont;				// ÎÄ×ÖÑÕÉ«
+	QStringList m_stateTexts;       // ×´Ì¬ÎÄ±¾
+	QVector<int> m_statePositions;   // ×´Ì¬Î»ÖÃ
+	int m_nArcRadius;               // Ô²½Ç°ë¾¶
+	int m_nRectWidth;               // ¾ØĞÎ¿í¶È
+	const int m_nDuration = 100;    // ¶¯»­³ÖĞøÊ±¼ä
+	Slider* m_pSlider;              // »¬¿é
 
 signals:
 	void Clicked(int state);
@@ -53,19 +52,18 @@ class Slider : public QWidget
 	Q_OBJECT
 
 public:
-	explicit Slider(QWidget *parent = nullptr);
+	explicit Slider(QWidget* parent = nullptr);
 	~Slider();
-	void SetSliderColor(const QColor &color);
+	void SetSliderColor(const QColor& color);
 	void SetText(const QString &text);
 	void SetTextFont(const QFont &font);
 
 protected:
-	void paintEvent(QPaintEvent *event) override;
+	void paintEvent(QPaintEvent* event) override;
 
 private:
-	QString m_text;		  // æ»‘å—æ–‡æœ¬
-	QColor m_sliderColor; // æ»‘å—é¢œè‰²
-	QFont m_textFont;	  // æ–‡æœ¬å­—ä½“
+	QString m_text;                 // »¬¿éÎÄ±¾
+	QColor m_sliderColor;           // »¬¿éÑÕÉ«
+	QFont m_textFont;				// ÎÄ×ÖÑÕÉ«
 };
 
-#endif

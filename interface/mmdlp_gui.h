@@ -6,6 +6,10 @@
 #include "control_tab.h"
 #include "ui_mmdlp_gui.h"
 #include "projector_gui.h"
+#include <QApplication>
+#include <QGuiApplication>
+#include <QScreen>
+#include <QMessageBox>
 
 namespace Ui
 {
@@ -26,6 +30,9 @@ public:
 private:
 	Ui::MmdlpGui *ui;
 	ControlTab *control_tab = nullptr;
+
+private slots:
+	void checkScreen();
 };
 
 #endif // MMDLP_GUI_H

@@ -20,10 +20,7 @@ PrintTab::~PrintTab()
 {
 	delete ui;
 }
-/**
- * @brief 运行按钮回调，选择文件夹并开始打印
- * @return void
- */
+
 void PrintTab::on_runButton_clicked()
 {
 	ui->codeExecutionTextEdit->clear();
@@ -39,10 +36,7 @@ void PrintTab::on_runButton_clicked()
 	printThread->setSliceName(path);
 	printThread->start();
 }
-/** 
- * @brief 暂停按钮回调，暂停打印
- * @return void
-*/
+
 void PrintTab::on_pauseButton_clicked()
 {
     printThread->stopMutex.lock();
@@ -58,10 +52,7 @@ void PrintTab::on_pauseButton_clicked()
 		printThread->stopMutex.unlock();
 	}
 }
-/** 
- * @brief 停止按钮回调，停止打印
- * @return void
-*/
+
 void PrintTab::on_stopButton_clicked()
 {
 	ui->stopButton->setText("取消");
@@ -77,10 +68,7 @@ void PrintTab::on_stopButton_clicked()
 	printThread->stopMutex.unlock();
 	printThread->sendCommand();
 }
-/** 
- * @brief 同步投影仪图像
- * @param imagePath 图片路径
- */
+
 void PrintTab::showProj(const QString &imagePath)
 {
 	if (imagePath == "closeWindow")
@@ -101,19 +89,12 @@ void PrintTab::showProj(const QString &imagePath)
 		}
 	}
 }
-/** 
- * @brief 显示命令，所有的命令都来自于ControlThread的work函数received到的命令
- * @param command 命令
- * @return void
- */
+
 void PrintTab::commandDisplay(const QString &command)
 {
 	ui->codeExecutionTextEdit->append(command + "\n");
 }
-/**
- * @brief 打印结束后接收到信号更新按钮状态，弹出提示框
- * @return void
- */
+
 void PrintTab::printFinished()
 {
 	ui->runButton->setEnabled(true);
@@ -122,10 +103,7 @@ void PrintTab::printFinished()
     printThread->isPrinting = false;
 	QMessageBox::information(this, "Print Finished", "Print Finished");
 }
-/**
- * @brief 超时出错后接收到消息，更新按钮状态，弹出提示框
- * @return void
- */
+
 void PrintTab::timeOutError()
 {
 	ui->stopButton->setText("停止");

@@ -28,17 +28,17 @@ signals:
     void stopSignal();
 
 private:
-    int motorId = -1;         // 电机ID
-    double currentThreshold;  // 电流阈值
-    double velocityThreshold; // 速度阈值
+    int motorId = -1;
+    double currentThreshold;
+    double velocityThreshold;
 
-    double current = 0.0;  // 电流
-    double velocity = 0.0; // 速度
-    double position = 0.0; // 位置
+    double current = 0.0;
+    double velocity = 0.0;
+    double position = 0.0;
 
-    QMutex currentValueMutex;  // 电流值互斥锁
-    QMutex velocityValueMutex; // 速度值互斥锁
-    QMutex positionValueMutex; // 位置值互斥锁
+    QMutex currentValueMutex;
+    QMutex velocityValueMutex;
+    QMutex positionValueMutex;
 
     void disableMotor();
 

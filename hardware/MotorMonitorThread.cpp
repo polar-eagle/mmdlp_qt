@@ -24,10 +24,6 @@ MotorMonitorThread::~MotorMonitorThread()
 {
 }
 
-/**
- * @brief 电机监控线程
- * @return void
- */
 void MotorMonitorThread::run()
 {
     while (true)
@@ -41,31 +37,17 @@ void MotorMonitorThread::run()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
-/**
- * @brief 设置电机ID
- * @param motorId 电机ID
- * @return void
- */
 void MotorMonitorThread::setMotorID(int motorId)
 {
     this->motorId = motorId;
 }
-/**
- * @brief 设置阈值
- * @param currentThreshold 电流阈值
- * @param velocityThreshold 速度阈值
- * @return void
- */
+
 void MotorMonitorThread::setThresholds(double currentThreshold, double velocityThreshold)
 {
     this->currentThreshold = currentThreshold;
     this->velocityThreshold = velocityThreshold;
 }
-/**
- * @brief 电机监控
- * @return void
- * @note 电机超过电流阈值且速度低于速度阈值时，失能电机
- */
+
 void MotorMonitorThread::onMonitor()
 {
     if (motorId < 0)
@@ -89,10 +71,7 @@ void MotorMonitorThread::onMonitor()
         velocity = 0.0;
     }
 }
-/**
- * @brief 失能电机
- * @return void
- */
+
 void MotorMonitorThread::disableMotor()
 {
     try
@@ -106,13 +85,7 @@ void MotorMonitorThread::disableMotor()
         std::cerr << e.what() << '\n';
     }
 }
-/**
- * @brief 电机参数异步反馈
- * @param uID 电机ID
- * @param paramType 参数类型
- * @param paramValue 参数值
- * @return void
- */
+
 void MotorMonitorThread::paramFeedback(ActuatorController::UnifiedID uID, int paramType, double paramValue)
 {
     if (uID.actuatorID != this->motorId)

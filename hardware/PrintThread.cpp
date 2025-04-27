@@ -12,10 +12,7 @@ void PrintThread::setSliceName(const QString &name)
     sliceName = name;
 }
 
-/**
- * @brief 等待finish指令后发送下一条命令
- * @return void
-*/
+
 void PrintThread::sendCommand()
 {
     if (!isPrinting)
@@ -42,9 +39,6 @@ void PrintThread::sendCommand()
     emit transitCommand(commandList[commandIndex++]);
     mutex.unlock();
 }
-/**
- * @brief 打印线程，读取gcode文件存入列表，发送第一条指令开启循环
- */
 void PrintThread::run()
 {
     commandList.clear();

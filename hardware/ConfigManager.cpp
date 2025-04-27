@@ -7,10 +7,6 @@ ConfigManager &ConfigManager::instance()
     return instance;
 }
 
-/**
- * @brief 构造函数,默认配置文件路径为可执行文件路径下的config.yaml
- * @return void
- */
 ConfigManager::ConfigManager()
 {
     QString defaultFilePath = "config.yaml";
@@ -19,11 +15,6 @@ ConfigManager::ConfigManager()
         qWarning() << "Failed to load default config file:" << defaultFilePath;
     }
 }
-/**
- * @brief 保存配置文件
- * @param filePath 配置文件路径
- * @return bool 是否保存成功
- */
 bool ConfigManager::saveConfig(const QString &filePath)
 {
     QMutexLocker locker(&mutex);
@@ -43,11 +34,7 @@ bool ConfigManager::saveConfig(const QString &filePath)
     qDebug() << "Config saved successfully to" << filePath;
     return true;
 }
-/**
- * @brief 加载配置文件
- * @param filePath 配置文件路径
- * @return bool 是否加载成功
- */
+
 bool ConfigManager::loadConfig(const QString &filePath)
 {
     QMutexLocker locker(&mutex);
@@ -68,11 +55,6 @@ bool ConfigManager::loadConfig(const QString &filePath)
     return true;
 }
 
-/**
- * @brief 解析yaml格式的配置文件
- * @param content 配置文件内容
- * @return QVariantMap 解析后的配置数据
- */
 QVariantMap ConfigManager::parseYaml(const QString &content)
 {
     QVariantMap result;
@@ -115,33 +97,19 @@ QVariantMap ConfigManager::parseYaml(const QString &content)
 
     return result;
 }
-/**
- * @brief 根据配置项的键获取配置项的值
- * @param key 配置项的键
- * @return QVariant 配置项的值
- */
+
 QVariant ConfigManager::getValue(const QString &key) const
 {
     QMutexLocker locker(&mutex);
     return configData.value(key);
 }
 
-/**
- * @brief 根据配置组的键获取配置组
- * @param group 配置组的键
- * @return QVariantMap 配置组
- */
 QVariantMap ConfigManager::getGroup(const QString &group) const
 {
     QMutexLocker locker(&mutex);
     return configData.value(group).toMap();
 }
 
-/**
- * @brief 更新配置项的值
- * @param key 配置项的键
- * @param newValue 新的值
- */
 bool ConfigManager::updateValue(const QString &key, const QVariant &newValue)
 {
     QMutexLocker locker(&mutex);
@@ -179,12 +147,6 @@ bool ConfigManager::updateValue(const QString &key, const QVariant &newValue)
         return false;
     }
 }
-/**
- * @brief 序列化配置数据为yaml格式
- * @param data 配置数据
- * @param indentLevel 缩进级别
- * @return QString 序列化后的yaml字符串
- */
 QString ConfigManager::serializeYaml(const QVariantMap &data, int indentLevel) const
 {
     QStringList yamlLines;

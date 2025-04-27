@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     MmdlpGui *mmdlpGui = new MmdlpGui(nullptr, projectorGui);
     mmdlpGui->setWindowFlags(Qt::Window | Qt::WindowStaysOnTopHint);
     projectorGui->setWindowFlags(Qt::Window | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-    disableSystemKeys();
+    // disableSystemKeys();
     QList<QScreen *> screens = a.screens();
     if (screens.size() > 1)
     {
@@ -76,6 +76,7 @@ int main(int argc, char *argv[])
     else
     {
         QMessageBox::critical(nullptr, "Error", "Screen number is less than 2");
+        return a.exec();
     }
     mmdlpGui->show();
     projectorGui->show();

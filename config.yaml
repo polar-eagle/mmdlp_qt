@@ -5,7 +5,7 @@ motor:
   glass_home: 19.499191284179688
   glass_lead: 2.0
   glass_max_position: 0
-  glass_min_position: -50
+  glass_min_position: -50.0
   glass_motor_id: 1
   glass_safe_current_limit: 1.2
   glass_safe_velocity_limit: 100

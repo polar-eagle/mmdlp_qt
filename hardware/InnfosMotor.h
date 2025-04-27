@@ -22,9 +22,9 @@ private:
     double default_dec = 0.0;
     double default_vel = 0.0;
 
-    double errorThreshold = 0.1; // 允许的误差范围
+    double errorThreshold = 0.1;
 
-    std::atomic<double> position = 0.0;
+    std::atomic<double>  position = 0.0;
 
     uint32_t error_code = Actuator::ErrorsDefine::ERR_NONE;
 

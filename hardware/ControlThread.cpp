@@ -14,7 +14,7 @@ ControlThread::ControlThread(QObject *parent)
     rotateMotor = motorManager->RotateMotor();
 
     serialSender = new SerialSender();
-    serialSender->openPort("COM3", 9600);
+    serialSender->openPort("COM4", 9600);
 
     cameraManager = new CameraManager();
     cameraManager->setCameraIndex(0);
@@ -28,31 +28,17 @@ ControlThread::~ControlThread()
     delete projectorManager;
 }
 
-/**
- * @brief 接收各个地方来的命令
- * @param command 命令
- * @return void
- */
 void ControlThread::receiveCommand(const QString &command)
 {
     QMutexLocker locker(&mutex);
     this->currentCommand = command;
 }
 
-/**
- * @brief 接收切片名称
- * @param sliceName 切片名称
- * @return void
- */
 void ControlThread::setSliceName(const QString &sliceName)
 {
     this->sliceName = sliceName;
 }
 
-/**
- * @brief 控制线程
- * @return void
- */
 void ControlThread::run()
 {
     while (true)
@@ -73,11 +59,6 @@ void ControlThread::run()
     }
 }
 
-/**
- * @brief 根据命令执行相应操作
- * @return void
- * @note 通过串口发送数据，控制电机运动，投影仪显示，相机拍照等
- */
 void ControlThread::work()
 {
     if (currentCommand.isEmpty())
@@ -193,21 +174,19 @@ void ControlThread::work()
     {
         int materialIndex = line[1].toInt();
         int materialNum = line[3].toInt();
-        serialSender->sendData("e");
         // plateMotor->moveToEEPotision(plateMotor->MaxPosition());
         // glassMotor->moveToEEPotision(glassMotor->MinPosition());
-        if (line[2] == "backflow")
+        if (line[2] == "feed")
         {
             switch (materialIndex)
             {
             case 0:
-                rotateMotor->moveToEEPotision(2.5);
                 for (int i = 0; i < materialNum; i++)
-                    serialSender->sendData("g");
+                    serialSender->sendData("e");
                 break;
             case 1:
                 for (int i = 0; i < materialNum; i++)
-                    serialSender->sendData("h");
+                    serialSender->sendData("g");
                 break;
             case 2:
                 for (int i = 0; i < materialNum; i++)
@@ -215,14 +194,13 @@ void ControlThread::work()
                 break;
             }
         }
-        else if (line[2] == "feed")
+        else if (line[2] == "backflow")
         {
             switch (materialIndex)
             {
             case 0:
-                rotateMotor->moveToEEPotision(2.5);
                 for (int i = 0; i < materialNum; i++)
-                    serialSender->sendData("g");
+                    serialSender->sendData("f");
                 break;
             case 1:
                 for (int i = 0; i < materialNum; i++)
@@ -230,26 +208,34 @@ void ControlThread::work()
                 break;
             case 2:
                 for (int i = 0; i < materialNum; i++)
-                    serialSender->sendData("i");
+                    serialSender->sendData("j");
                 break;
             }
         }
-        serialSender->sendData("f");
     }
     else if (line[0] == "ASS")
     {
-        serialSender->sendData("m");
         if (line[1] == "input")
         {
             for (int i=0;i<line[2].toInt();i++)
-                serialSender->sendData("o");
+                serialSender->sendData("k");
         }
         else if (line[1] == "output")
         {
             for (int i=0;i<line[2].toInt();i++)
-                serialSender->sendData("p");
+                serialSender->sendData("m");
         }
-        serialSender->sendData("n");
+    }
+    else if (line[0] == "groove")
+    {
+        if (line[1] == "open") serialSender->sendData("q");
+        else if (line[1] == "close") serialSender->sendData("r");
+    }
+    else if  (line[0] == "slide")
+    {
+        if (line[1].toInt() == 0) serialSender->sendData("s");
+        else if (line[1].toInt() == 1) serialSender->sendData("t");
+        else if (line[1].toInt() == 2) serialSender->sendData("u");
     }
     else if (line[0] == "plateEnable")
     {
@@ -277,9 +263,6 @@ void ControlThread::work()
     }
 }
 
-/**
- * @brief 根据printTab发送的切片名称设置切片名称
- */
 void ControlThread::transSliceName(const QString &sliceName)
 {
     setSliceName(sliceName);

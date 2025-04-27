@@ -6,13 +6,13 @@ ProjectorGui::ProjectorGui(QWidget *parent)
 
 {
 	ui->setupUi(this);
-	setFixedSize(1920, 1080);
+	setFixedSize(3840, 2160);
 	setStyleSheet("background-color: black;");
 
 	imageLabel = new QLabel(this);
 	imageLabel->setAlignment(Qt::AlignCenter);
 
-	imageLabel->setFixedSize(1920, 1080);
+	imageLabel->setFixedSize(3840, 2160);
 
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	layout->addWidget(imageLabel);
@@ -24,11 +24,7 @@ ProjectorGui::~ProjectorGui()
 {
 	delete ui;
 }
-/**
- * @brief 投影仪显示图片
- * @param imagePath 图片路径
- * @return void
- */
+
 void ProjectorGui::showImage(const QString &imagePath)
 {
 	qDebug() << "Loading image from path:" << imagePath;

@@ -13,12 +13,7 @@ SerialSender::~SerialSender()
 {
     closePort();
 }
-/**
- * @brief 打开串口
- * @param portName 端口名称
- * @param baudRate 波特率
- * @return bool 是否打开成功
- */
+
 bool SerialSender::openPort(const QString &portName, int baudRate)
 {
     if (portOpen) {
@@ -43,10 +38,7 @@ bool SerialSender::openPort(const QString &portName, int baudRate)
 
     return true;
 }
-/**
- * @brief 关闭串口
- * @return void
- */
+
 void SerialSender::closePort()
 {
     if (portOpen && serialPort) {
@@ -61,19 +53,12 @@ void SerialSender::closePort()
         }
     }
 }
-/**
- * @brief 判断串口是否打开
- * @return bool 是否打开
- */
+
 bool SerialSender::isPortOpen() const
 {
     return portOpen;
 }
-/**
- * @brief 串口发送数据
- * @param data 数据
- * @return bool 是否发送成功
- */
+
 bool SerialSender::sendData(const QByteArray &data)
 {
     if (!portOpen) {
@@ -98,10 +83,7 @@ bool SerialSender::sendData(const QByteArray &data)
 
     return true;
 }
-/**
- * @brief 获取可用串口列表
- * @return QStringList 串口列表
- */
+
 QStringList SerialSender::availablePorts() const
 {
     QStringList portList;

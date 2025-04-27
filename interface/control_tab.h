@@ -26,56 +26,59 @@ public:
 	void initMonitorThread();
 	ControlThread *controlThread;
 
-	InnfosMotor *plateMotor;  // plate电机
-	InnfosMotor *glassMotor;  // glass电机
-	InnfosMotor *rotateMotor; // rotate电机
+	InnfosMotor *plateMotor;
+	InnfosMotor *glassMotor;
+	InnfosMotor *rotateMotor;
 
-	double plateTargetPos = 0.0;  // plate目标位置
-	double glassTargetPos = 0.0;  // glass目标位置
-	double rotateTargetPos = 0.0; // rotate目标位置
+	double plateTargetPos = 0.0;
+	double glassTargetPos = 0.0;
+	double rotateTargetPos = 0.0;
 public slots:
 	void sendCommand();
 
 signals:
 	void transitCommand(const QString &command);
-	void loadImageForPrint(const QString &imagePath);
+	void printTabShow(const QString &imagePath);
 
 private:
 	Ui::ControlTab *ui;
 
-	MotorMonitorThread *glassMotorMonitorThread;  // glass电机监控线程
-	MotorMonitorThread *plateMotorMonitorThread;  // plate电机监控线程
-	MotorMonitorThread *rotateMotorMonitorThread; // rotate电机监控线程
+	MotorMonitorThread *glassMotorMonitorThread;
+	MotorMonitorThread *plateMotorMonitorThread;
+	MotorMonitorThread *rotateMotorMonitorThread;
 
-	SwitchButton *materialSelectButton;	 // 材料选择按钮
-	SwitchButton *magnitudeSelectButton; // 量程选择按钮
+	SwitchButton *materialSelectButton;
+	SwitchButton *magnitudeSelectButton;
 
-	ProjectorManager *projectorManager; // 投影仪管理器
+	ProjectorManager *projectorManager;
 
-	QString matrialSelected;   // 选择的材料
-	QString magnitudeSelected; // 选择的量程
+	QString magnitudeSelected;
+	QString matrialSelected;
 
-	bool isPlatePlatformSelected = false;  // 是否选择了plate平台
-	bool isGlassPlatformSelected = false;  // 是否选择了glass平台
-	bool isRotatePlatformSelected = false; // 是否选择了rotate平台
+	bool isTurnableSelected = false;
+	bool isGlassPlatSelected = false;
+	bool isGrowthPlatSelected = false;
 
-	std::atomic<bool> isPlatePlatformEnable = false;  // plate电机是否使能
-	std::atomic<bool> isGlassPlatformEnable = false;  // glass电机是否使能
-	std::atomic<bool> isRotatePlatformEnable = false; // rotate电机是否使能
+	std::atomic<bool> isPlateMotorEnable = false;
+	std::atomic<bool> isGlassMotorEnable = false;
+	std::atomic<bool> isRotateMotorEnable = false;
+	bool plateEn = false;
+	bool glassEn = false;
+	bool rotateEn = false;
 
-	const QString rotatePlatformIconPath = "../../../interface/icon/rotatePlatform.png";				  // 旋转平台按钮图片
-	const QString rotatePlatformSelectedIconPath = "../../../interface/icon/rotatePlatform_selected.png"; // 选择旋转平台按钮图片
-	const QString platformIconPath = "../../../interface/icon/platform.png";							  // 平台按钮图片
-	const QString glassPlatformSelectedIconPath = "../../../interface/icon/glassPlatform_selected.png";	  // 选择玻璃平台按钮图片
-	const QString platePlatformSelectedIconPath = "../../../interface/icon/platePlatform_selected.png";	  // 选择平板平台按钮图片
-	const QString raiseIconPath = "../../../interface/icon/raise.png";									  // 上升按钮图片
-	const QString raisePressedIconPath = "../../../interface/icon/raise_pressed.png";					  // 上升按钮按下图片
-	const QString lowerIconPath = "../../../interface/icon/lower.png";									  // 下降按钮图片
-	const QString lowerPressedIconPath = "../../../interface/icon/lower_pressed.png";					  // 下降按钮按下图片
-	const QString leftTurnIconPath = "../../../interface/icon/leftTurn.png";							  // 左转按钮图片
-	const QString leftTurnPressedIconPath = "../../../interface/icon/leftTurn_pressed.png";				  // 左转按钮按下图片
-	const QString rightTurnIconPath = "../../../interface/icon/rightTurn.png";							  // 右转按钮图片
-	const QString rightTurnPressedIconPath = "../../../interface/icon/rightTurn_pressed.png";			  // 右转按钮按下图片
+	const QString turnableIconPath = "../../../interface/icon/turnable.png";
+	const QString turnableSelectedIconPath = "../../../interface/icon/turnable_selected.png";
+	const QString leftTurnIconPath = "../../../interface/icon/leftTurn.png";
+	const QString leftTurnPressedIconPath = "../../../interface/icon/leftTurn_pressed.png";
+	const QString rightTurnIconPath = "../../../interface/icon/rightTurn.png";
+	const QString rightTurnPressedIconPath = "../../../interface/icon/rightTurn_pressed.png";
+	const QString platformIconPath = "../../../interface/icon/platform.png";
+	const QString glassPlatSelectedIconPath = "../../../interface/icon/glassPlat_selected.png";
+	const QString growthPlatSelectedIconPath = "../../../interface/icon/growthPlat_selected.png";
+	const QString raiseIconPath = "../../../interface/icon/raise.png";
+	const QString raisePressedIconPath = "../../../interface/icon/raise_pressed.png";
+	const QString lowerIconPath = "../../../interface/icon/lower.png";
+	const QString lowerPressedIconPath = "../../../interface/icon/lower_pressed.png";
 
 private slots:
 	void on_platformButton_clicked();
